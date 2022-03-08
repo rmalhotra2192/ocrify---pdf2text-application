@@ -1,8 +1,8 @@
-PDF to Text OCR application
+## OCRify - PDF to Text OCR application
 
 This is an ocr application with deployed backend at `backend-url` to recognize multilingual text from pdf.
 
-Tech Stack
+### Tech Stack
 
 The OCR engine is based on Tesseract. For more on the development of OCR engine, visit the following repository - `ocr engine repository`
 
