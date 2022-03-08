@@ -1,5 +1,5 @@
 # Byte-compiled / optimized / DLL files
-services/backend/src/__pycache__/
+services/backend/src/__pycache__/*.pyc
 *.py[cod]
 
 # C extensions

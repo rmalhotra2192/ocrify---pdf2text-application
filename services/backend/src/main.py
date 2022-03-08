@@ -19,6 +19,25 @@ async def create_upload_file(file: UploadFile = File(...)):
     return pdfid
 
 
+@app.get("/runocronpdf/{pdfid}")
+async def runocronpdf(pdfid):
+    # task = run_ocr_process_on_pdf.delay(pdfid)
+    task = {"id": ""}
+    return JSONResponse({"task_id": task.id})
+
+
+@app.get("/ocrstatus/{task_id}")
+def get_status(task_id):
+    # task_result = run_ocr_process_on_pdf.AsyncResult(task_id)
+    task_result = {"status": "", "result": ""}
+    result = {
+        "task_id": task_id,
+        "task_status": task_result.status,
+        "task_result": task_result.result
+    }
+    return JSONResponse(result)
+
+
 @app.get("/file/{pdfid}", response_class=FileResponse)
 async def read_item(pdfid):
     return "../uploaded-files/" + pdfid + ".pdf"
