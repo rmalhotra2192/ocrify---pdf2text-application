@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+aiofiles
+celery
+pytesseract
+pdf2image
+opencv-python
+matplotlib
+python-multipart
