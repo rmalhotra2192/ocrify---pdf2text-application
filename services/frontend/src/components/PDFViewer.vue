@@ -56,7 +56,7 @@ export default {
     getPdf() {
       var self = this;
       self.pdfdata = pdfvuer.createLoadingTask(
-        "http://localhost:8000/file/" + this.pdfpath
+        "http://localhost:5001/file/" + this.pdfpath
       );
       self.pdfdata.then((pdf) => {
         self.numPages = pdf.numPages;

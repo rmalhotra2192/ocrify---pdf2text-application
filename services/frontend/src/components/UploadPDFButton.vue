@@ -51,7 +51,7 @@ export default {
       let formData = new FormData();
       formData.append("file", this.file);
 
-      var baseURL = "http://127.0.0.1:8000";
+      var baseURL = "http://127.0.0.1:5001";
 
       let config = {
         header: {

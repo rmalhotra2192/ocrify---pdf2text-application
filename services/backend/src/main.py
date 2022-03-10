@@ -7,6 +7,22 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:8082"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.post("/uploadfile")
 async def create_upload_file(file: UploadFile = File(...)):
@@ -14,7 +30,7 @@ async def create_upload_file(file: UploadFile = File(...)):
 
     pdfid = generate_pdfid()
 
-    async with aiofiles.open("../uploaded-files/" + pdfid + ".pdf", mode='wb') as f:
+    async with aiofiles.open("/app/uploaded-files/" + pdfid + ".pdf", mode='wb') as f:
         await f.write(contents)
     return pdfid
 
@@ -40,7 +56,7 @@ def get_status(task_id):
 
 @app.get("/file/{pdfid}", response_class=FileResponse)
 async def read_item(pdfid):
-    return "../uploaded-files/" + pdfid + ".pdf"
+    return "/app/uploaded-files/" + pdfid + ".pdf"
 
 
 def generate_pdfid():

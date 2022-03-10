@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     sendRequestToRunOCR() {
-      var baseURL = "http://127.0.0.1:8000";
+      var baseURL = "http://127.0.0.1:5001";
 
       axios
         .get(baseURL + "/runocronpdf/" + this.pdfid)
