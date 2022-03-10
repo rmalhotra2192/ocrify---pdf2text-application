@@ -75,7 +75,7 @@ export default {
     },
     checkStatus() {
       setTimeout(() => {
-        let baseURL = "http://127.0.0.1:8000";
+        let baseURL = "http://127.0.0.1:5001";
 
         axios.get(baseURL + "/ocrstatus/" + this.currentTaskID).then((data) => {
           if (data["data"]["task_status"] != "PENDING") {
