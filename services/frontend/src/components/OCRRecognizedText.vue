@@ -1,9 +1,18 @@
 <template>
-  <div></div>
+  <div>
+    {{ content }}
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    content: {
+      type: String,
+      default: "",
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

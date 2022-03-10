@@ -1,7 +1,22 @@
-<template></template>
+<template>
+  <div id="app">
+    <OCRRecognizedText :content="recognizedText"></OCRRecognizedText>
+  </div>
+</template>
 
 <script>
-export default {};
+import OCRRecognizedText from "@/components/OCRRecognizedText.vue";
+
+export default {
+  data() {
+    return {
+      recognizedText: "Test Data",
+    };
+  },
+  components: {
+    OCRRecognizedText,
+  }
+};
 </script>
 
 <style>
@@ -11,5 +26,10 @@ export default {};
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.ocrtext-container {
+  height: 550px;
+  overflow-y: scroll;
 }
 </style>
