@@ -1,0 +1,6 @@
+celery
+Redis
+pytesseract
+pdf2image
+opencv-python
+matplotlib
