@@ -12,7 +12,7 @@ def get_config():
 
 
 def clear_data():
-    data_dirs = ["/app/uploaded-files", "./temp/imgs"]
+    data_dirs = ["/celery/uploaded-files/", "/celery/temp/imgs"]
 
     for _dir in data_dirs:
         for _file in os.listdir(_dir):
@@ -30,10 +30,10 @@ def sort_ascendically(_dict):
 
 
 def convert_pdf_to_images(config, pdfid):
-    pages = convert_from_path("/app/uploaded-files/" +
+    pages = convert_from_path("/celery/uploaded-files/" +
                               pdfid + ".pdf", config['pdf_2_image_dpi'])
 
-    os.makedirs("/app/temp/imgs/" + pdfid + "/", exist_ok=True)
+    os.makedirs("/celery/temp/imgs/" + pdfid + "/", exist_ok=True)
 
     for (idx, page) in enumerate(pages):
         image_name = "Page_" + str(idx) + ".jpg"
@@ -110,7 +110,3 @@ def recognize(pdfid):
             _text[filename.split("_")[1].split('.')[0]] = text
 
     return sort_ascendically(_text)
-
-
-if __name__ == '__main__':
-    clear_data()

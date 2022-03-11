@@ -1,7 +1,7 @@
 import random
 import string
 import aiofiles
-from .celery_worker import run_ocr_process_on_pdf
+from .celery_worker import celery
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -38,13 +38,15 @@ async def create_upload_file(file: UploadFile = File(...)):
 
 @app.get("/runocronpdf/{pdfid}")
 async def runocronpdf(pdfid):
-    task = run_ocr_process_on_pdf.delay(pdfid)
-    return JSONResponse({"task_id": task.id})
+    task_name = "run_ocr_process_on_pdf"
+    task = celery.send_task(task_name, args=[pdfid])
+    return JSONResponse({"task_id": task.id, "url": 'localhost:5000/check_task/{}'.format(task.id)})
+    # task = run_ocr_process_on_pdf.delay()
 
 
 @app.get("/ocrstatus/{task_id}")
 def get_status(task_id):
-    task_result = run_ocr_process_on_pdf.AsyncResult(task_id)
+    task_result = celery.AsyncResult(task_id)
 
     result = {
         "task_id": task_id,

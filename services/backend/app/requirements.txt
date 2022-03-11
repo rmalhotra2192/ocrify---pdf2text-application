@@ -2,8 +2,5 @@ fastapi
 uvicorn
 aiofiles
 celery
-pytesseract
-pdf2image
-opencv-python
-matplotlib
+Redis
 python-multipart
