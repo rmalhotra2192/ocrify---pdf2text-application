@@ -7,7 +7,7 @@ from pdf2image import convert_from_path
 
 
 def get_config():
-    with open('config.json') as config:
+    with open(os.path.join(os.path.dirname(__file__), 'config.json')) as config:
         return json.loads(config.read())
 
 
@@ -86,12 +86,15 @@ def recognize(pdfid):
 
     _text = {}
 
-    for (idx, filename) in enumerate(os.listdir(config["pdf_2_image_savepath"])):
+    pdfpages_folder = os.path.join(config["pdf_2_image_savepath"], pdfid)
 
-        image, line_items_coordinates = get_marked_regions(
-            config["pdf_2_image_savepath"] + filename)
+    for (idx, filename) in enumerate(os.listdir(pdfpages_folder)):
 
-        original_image = cv2.imread(config["pdf_2_image_savepath"] + filename)
+        _imgfile = os.path.join(pdfpages_folder, filename)
+
+        image, line_items_coordinates = get_marked_regions(_imgfile)
+
+        original_image = cv2.imread(_imgfile)
 
         for line_items_coordinate in line_items_coordinates:
             c = line_items_coordinate
@@ -110,3 +113,8 @@ def recognize(pdfid):
             _text[filename.split("_")[1].split('.')[0]] = text
 
     return sort_ascendically(_text)
+
+
+if __name__ == "__main__":
+    pdfid = input("PDF ID:")
+    recognize(pdfid)

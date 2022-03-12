@@ -1,4 +1,6 @@
-services/backend/uploaded-files/
+services/backend/app/uploaded-files/
+services/backend/celery/uploaded-files/
+services/backend/celery/temp/*
 
 # Byte-compiled / optimized / DLL files
 services/backend/src/__pycache__/
